@@ -2,6 +2,14 @@ package blow_fish;
 
 
 
+/**
+ * This class contain some basic binary operations which 
+ * are used in Blowfish cipher.
+ * 
+ * @author ondrejvane
+ * @version 1.0
+ *
+ */
 public class BinOperations {
 	
 	
@@ -65,12 +73,52 @@ public class BinOperations {
 		return result;
 	}
 	
+	/**
+	 * Function which is add two binary numbers. The result is modulated
+	 * by value 2^32. So max value of adding is 2^32.
+	 * @param s1		First binary number.
+	 * @param s2		Second binary number.
+	 * @return		Result of adding first and second number.
+	 */
+	public static String binaryAddition(String s1, String s2) {
+	    
+		if (s1 == null || s2 == null) return "";
+	    int first = s1.length() - 1;
+	    int second = s2.length() - 1;
+	    StringBuilder sb = new StringBuilder();
+	    int carry = 0;
+	    
+	    while (first >= 0 || second >= 0) {
+	        int sum = carry;
+	        if (first >= 0) {
+	            sum += s1.charAt(first) - '0';
+	            first--;
+	        }
+	        if (second >= 0) {
+	            sum += s2.charAt(second) - '0';
+	            second--;
+	        }
+	        carry = sum >> 1;
+	        sum = sum & 1;
+	        sb.append(sum == 0 ? '0' : '1');
+	    }
+	    
+
+	    sb.reverse();
+	    return String.valueOf(sb);
+	}
+	
 	
 	public static void main(String[] args) {
 		
 		System.out.println(functionXor("10101101", "10101101"));
 		System.out.println(functionXor("10101101", "01010010"));
 		System.out.println(functionXor("0111011010101", "1011000100100"));
+		System.out.println(binaryAddition("00001010110110101101101011011010", "00001010110110101101101011011010"));
+		System.out.println(binaryAddition("11111111111111111111111111111111", "101"));
+		
+		int MAX = Integer.MAX_VALUE;
+		System.out.print(MAX);
 	}
 
 }
