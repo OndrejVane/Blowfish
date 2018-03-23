@@ -61,7 +61,6 @@ public class UserInterface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("BlowFish");
-		//scroll = new JScrollPane(txtrInput, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		JLabel lblInput = new JLabel("Input:");
 		lblInput.setBounds(43, 8, 61, 23);
@@ -114,7 +113,7 @@ public class UserInterface {
 					inputText = txtrInput.getText();
 					CharException.validateChar(inputText);
 					InputException.validateInput(inputText);
-					txtrOutput.setText(BlowFishAlgorithm.stringToBinary(inputText));
+					txtrOutput.setText(BinOperations.stringToBinary(inputText));
 					
 					//TODO napsat si 
 					
