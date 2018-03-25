@@ -19,15 +19,15 @@ public class BinOperations {
 	 * @param number		Integer number from 0 to 255.
 	 * @return text		String with binary representation of number.
 	 */
-	private static String decToByte(int number) {
+	public static String decToBin(int number, int numberOfBits) {
 		String text;
 		String temp = "";
 		int numberOfZero;
 		
 		text = Integer.toBinaryString(number);
 		
-		if(text.length() != 8) {
-			numberOfZero = 8-text.length();
+		if(text.length() != numberOfBits) {
+			numberOfZero = numberOfBits-text.length();
 			for(int i = 0; i<numberOfZero; i++) {
 				temp = temp + "0";
 			}
@@ -47,7 +47,7 @@ public class BinOperations {
 		String bin = "";
 		
 		for(int i=0; i<text.length(); i++) {
-			bin = bin + decToByte(text.charAt(i));
+			bin = bin + decToBin(text.charAt(i), 8);
 		}
 		return bin;
 	}
@@ -106,6 +106,20 @@ public class BinOperations {
 
 	    sb.reverse();
 	    return String.valueOf(sb);
+	}
+	
+	/**
+	 * @param input
+	 * @return
+	 */
+	public static int binToDec(String input) {
+		int decimalValue = Integer.parseInt(input, 2);
+		return decimalValue;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.print(decToBin(22,32));
 	}
 	
 
