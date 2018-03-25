@@ -16,15 +16,15 @@ public class BinOperations {
 	/**
 	 * Function which convert integer number to eight-length
 	 * binary number. Number is store as string. 
-	 * @param number		Integer number from 0 to 255.
+	 * @param values		Integer number from 0 to 255.
 	 * @return text		String with binary representation of number.
 	 */
-	public static String decToBin(int number, int numberOfBits) {
+	public static String decToBin(int values, int numberOfBits) {
 		String text;
 		String temp = "";
 		int numberOfZero;
 		
-		text = Integer.toBinaryString(number);
+		text = Integer.toBinaryString(values);
 		
 		if(text.length() != numberOfBits) {
 			numberOfZero = numberOfBits-text.length();
