@@ -17,6 +17,12 @@ import javax.swing.event.AncestorEvent;
 
 
 
+/**
+ * Class which is create user interface and read 
+ * data from user.
+ * @author ondrejvane
+ *
+ */
 public class UserInterface {
 
 	private JFrame frame;
@@ -26,7 +32,7 @@ public class UserInterface {
 	public JProgressBar progressBar;
 	public String inputText;
 	public String outputText;
-	public String key;
+	public String inputKey;
 	public int progressCounter = 78;
 
 	/**
@@ -109,33 +115,47 @@ public class UserInterface {
 		btnCipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				BlowfishAlgorithm blowFish = new BlowfishAlgorithm();
+				boolean controlChar = true;
+				boolean controlEmpty = true;
+						
 				try {
 					inputText = txtrInput.getText();
 					CharException.validateChar(inputText);
 					InputException.validateInput(inputText);
-					txtrOutput.setText(BinOperations.stringToBinary(inputText));
 					
-					//TODO napsat si 
+					
+					blowFish.setText(inputText);
 					
 				}catch(InvalidCharException m) {
+					controlChar = false;
 					JOptionPane.showMessageDialog(null, "Input text only chars from 8-bit table!");
+					
 				}catch(InvalidInputException n) {
-					JOptionPane.showMessageDialog(null, "Entry field is empty!");
+					controlEmpty = false;
+					JOptionPane.showMessageDialog(null, "Input field is empty!");
 				}
 				
 				try {
-					key = txtrKey.getText();
-					CharException.validateChar(key);
-					InputException.validateInput(key);
+					inputKey = txtrKey.getText();
+					CharException.validateChar(inputKey);
+					InputException.validateInput(inputKey);
+					
+					blowFish.setKey(inputKey);
 					
 				}catch(InvalidCharException m) {
+					controlChar = false;
 					JOptionPane.showMessageDialog(null, "Key chars from 8-bit table!");
+					
 				}catch(InvalidInputException n) {
-					JOptionPane.showMessageDialog(null, "Entry field is empty!");
+					controlEmpty = false;
+					JOptionPane.showMessageDialog(null, "Key field is empty!");
 				}
 				
-				
-				
+				if(controlChar == true && controlEmpty == true ) {
+					System.out.println("Text: "+blowFish.text+" Key:"+blowFish.key);
+				}
+					
 				
 				
 			}

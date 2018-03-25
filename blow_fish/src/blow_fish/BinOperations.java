@@ -80,7 +80,7 @@ public class BinOperations {
 	 * @param s2		Second binary number.
 	 * @return		Result of adding first and second number.
 	 */
-	public static String binaryAddition(String s1, String s2) {
+	public static String binaryAdd(String s1, String s2) {
 	    
 		if (s1 == null || s2 == null) return "";
 	    int first = s1.length() - 1;
@@ -108,17 +108,5 @@ public class BinOperations {
 	    return String.valueOf(sb);
 	}
 	
-	
-	public static void main(String[] args) {
-		
-		System.out.println(functionXor("10101101", "10101101"));
-		System.out.println(functionXor("10101101", "01010010"));
-		System.out.println(functionXor("0111011010101", "1011000100100"));
-		System.out.println(binaryAddition("00001010110110101101101011011010", "00001010110110101101101011011010"));
-		System.out.println(binaryAddition("11111111111111111111111111111111", "101"));
-		
-		int MAX = Integer.MAX_VALUE;
-		System.out.print(MAX);
-	}
 
 }
