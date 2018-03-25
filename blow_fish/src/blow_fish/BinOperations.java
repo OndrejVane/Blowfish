@@ -14,10 +14,11 @@ public class BinOperations {
 	
 	
 	/**
-	 * Function which convert integer number to eight-length
-	 * binary number. Number is store as string. 
-	 * @param values		Integer number from 0 to 255.
-	 * @return text		String with binary representation of number.
+	 * Function which convert integer number to binary number with specific
+	 * number of digits.
+	 * @param values			Integer number.
+	 * @param numberOfBits	Is count of digits binary number.	
+	 * @return				binary number.
 	 */
 	public static String decToBin(int values, int numberOfBits) {
 		String text;
@@ -109,18 +110,15 @@ public class BinOperations {
 	}
 	
 	/**
-	 * @param input
-	 * @return
+	 * Function which is transform binary number as string to decimal value.
+	 * @param input	String inly with 0 and 1 chars.
+	 * @return		Decimal value of input binary number.
 	 */
 	public static int binToDec(String input) {
 		int decimalValue = Integer.parseInt(input, 2);
 		return decimalValue;
 	}
 	
-	public static void main(String[] args) {
-		
-		System.out.print(decToBin(22,32));
-	}
 	
 
 }
