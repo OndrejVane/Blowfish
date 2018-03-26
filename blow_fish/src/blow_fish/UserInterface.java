@@ -12,8 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
+
 
 
 
@@ -108,14 +107,9 @@ public class UserInterface {
 		txtrOutput.setEditable(false);
 		
 		JButton btnDecipher = new JButton("Decipher");
-		btnDecipher.setBounds(383, 189, 147, 29);
-		frame.getContentPane().add(btnDecipher);
-		
-		JButton btnCipher = new JButton("Cipher");
-		btnCipher.addActionListener(new ActionListener() {
+		btnDecipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				BlowfishAlgorithm blowFish = new BlowfishAlgorithm();
+
 				boolean controlChar = true;
 				boolean controlEmpty = true;
 						
@@ -124,8 +118,6 @@ public class UserInterface {
 					CharException.validateChar(inputText);
 					InputException.validateInput(inputText);
 					
-					
-					blowFish.setText(inputText);
 					
 				}catch(InvalidCharException m) {
 					controlChar = false;
@@ -141,7 +133,49 @@ public class UserInterface {
 					CharException.validateChar(inputKey);
 					InputException.validateInput(inputKey);
 					
-					blowFish.setKey(inputKey);
+				}catch(InvalidCharException m) {
+					controlChar = false;
+					JOptionPane.showMessageDialog(null, "Key chars from 8-bit table!");
+					
+				}catch(InvalidInputException n) {
+					controlEmpty = false;
+					JOptionPane.showMessageDialog(null, "Key field is empty!");
+				}
+				
+				if(controlChar == true && controlEmpty == true ) {
+					txtrOutput.setText(BlowfishAlgorithm.decipher(inputText, inputKey));
+				}
+			}
+		});
+		btnDecipher.setBounds(383, 189, 147, 29);
+		frame.getContentPane().add(btnDecipher);
+		
+		JButton btnCipher = new JButton("Cipher");
+		btnCipher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				boolean controlChar = true;
+				boolean controlEmpty = true;
+						
+				try {
+					inputText = txtrInput.getText();
+					CharException.validateChar(inputText);
+					InputException.validateInput(inputText);
+					
+					
+				}catch(InvalidCharException m) {
+					controlChar = false;
+					JOptionPane.showMessageDialog(null, "Input text only chars from 8-bit table!");
+					
+				}catch(InvalidInputException n) {
+					controlEmpty = false;
+					JOptionPane.showMessageDialog(null, "Input field is empty!");
+				}
+				
+				try {
+					inputKey = txtrKey.getText();
+					CharException.validateChar(inputKey);
+					InputException.validateInput(inputKey);
 					
 				}catch(InvalidCharException m) {
 					controlChar = false;
@@ -153,7 +187,7 @@ public class UserInterface {
 				}
 				
 				if(controlChar == true && controlEmpty == true ) {
-					System.out.println("Text: "+blowFish.text+" Key:"+blowFish.key);
+					txtrOutput.setText(BlowfishAlgorithm.encrypt(inputText, inputKey));
 				}
 					
 				
@@ -165,15 +199,6 @@ public class UserInterface {
 		
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
-		progressBar.addAncestorListener(new AncestorListener() {
-			public void ancestorAdded(AncestorEvent event) {
-				progressBar.setValue(progressCounter);
-			}
-			public void ancestorMoved(AncestorEvent event) {
-			}
-			public void ancestorRemoved(AncestorEvent event) {
-			}
-		});
 		progressBar.setBounds(125, 220, 411, 23);
 		frame.getContentPane().add(progressBar);
 	}

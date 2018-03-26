@@ -2,8 +2,6 @@ package blow_fish;
 
 public class BlowfishAlgorithm {
 	
-	String text;
-	String key;
 	
 	
     final static int SBOX_1[] = {
@@ -108,22 +106,16 @@ public class BlowfishAlgorithm {
     		3303, 8019, 7621, 1011, 0044, 9293, 2151, 6084, 2444, 8596, 3766, 9838,
     		9522, 8684, 7831, 6305};
 	
-	public void setText(String inputText){
-		this.text = inputText;
-	}
 	
-	public void setKey(String inputKey) {
-		this.key = inputKey;
-	}
 	
-	public static String sBox(String input, int[] values) {
+	private static String sBox(String input, int[] values) {
 		int decimalValue = BinOperations.binToDec(input);
 		String result = BinOperations.stringToBinary(Integer.toString(values[decimalValue]));
 		
 		return result;
 	}
 	
-	public static String cipherFunction(String input) {
+	private static String cipherFunction(String input) {
 		String input1_8bit = input.substring(0, 8);
 		String input2_8bit = input.substring(8, 16);
 		String input3_8bit = input.substring(16, 24);
@@ -142,7 +134,7 @@ public class BlowfishAlgorithm {
 		
 	}
 	
-	public static void expandKey(String inputKey) {
+	private static String[] expandKey(String inputKey) {
 		
 		String temp = "";
 		String expandedKey[] = new String[17];
@@ -162,6 +154,8 @@ public class BlowfishAlgorithm {
 				expandedKey[i] = temp.substring(i*32, (i*32) + 32);
 			}
 			
+			return expandedKey;
+			
 			
 		}else if(inputKey.length() == 68) {
 			
@@ -171,6 +165,8 @@ public class BlowfishAlgorithm {
 				expandedKey[i] = temp.substring(i*32, (i*32) + 32);
 				
 			}
+			
+			return expandedKey;
 			
 		} else {
 			
@@ -182,20 +178,47 @@ public class BlowfishAlgorithm {
 				
 			}
 			
+			return expandedKey;
+			
 		}
 	}
 	
+	private static String[] prepareText(String text) {
+		
+		while(text.length()%64 != 0) {
+			text = text + "¶";
+		}
+		
+		int count_of_blocks = text.length()/64;
+		String preparedText[] = new String [count_of_blocks]; 
+		
+		for(int i = 0; i<preparedText.length; i++) {
+			preparedText[i] = text.substring(i*64, (i*64) + 64);
+		}
+		
+		
+		return preparedText;
+	}
+	
 	public static String encrypt(String text, String key) {
+		
 		return null;
+		
 	}
 	
 	public static String decipher(String text, String key) {
-		return null;
+		
+		return "Text11:"+text+" Key11:"+key;
 	}
 
 	public static void main(String[] args) {
 		
-		expandKey("QWERTZU");
+		
+		String preparedText[] = prepareText("ahoj");
+		
+		for(int i = 0; i<preparedText.length; i++) {
+			System.out.println(preparedText[i]);
+		}
 
 	}
 
