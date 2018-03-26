@@ -119,12 +119,28 @@ public class BinOperations {
 		return decimalValue;
 	}
 	
-	public static void main(String[] args) {
-		
-		
-		System.out.println(stringToBinary("1"));
-
-	}
 	
-
+	/**
+	 * Function which transform bin number to string.
+	 * @param input	Input binary number as string.
+	 * @return 		Text in string.
+	 */
+	public static String binToString(String input) {
+		
+		String temp;
+		String result;
+		int numberOfLetters = input.length()/8;
+		char resultArray[] = new char[numberOfLetters];
+		
+		for(int i = 0; i<numberOfLetters;i++) {
+			
+			temp = input.substring(i*8, (i*8) + 8);
+			resultArray[i] = (char)binToDec(temp);
+		}
+		
+		result = String.copyValueOf(resultArray);
+		
+		return result;
+		
+	}
 }

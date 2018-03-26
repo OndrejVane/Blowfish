@@ -23,12 +23,12 @@ public class BlowfishAlgorithm {
     		3014, 6549, 5853, 7105, 8792, 2796, 8925, 8923, 5142, 9199, 5611, 2129,
     		2219, 6086, 4034, 4181, 5981, 3629, 7747, 7130, 9960, 5187, 0721, 1349,
     		9999, 9837, 2978, 3499, 5105, 9731, 7328, 1609, 6318, 5905, 0244, 5945,
-    		5346, 9083, 0264, 2522, 3082, 5334, 4685, 0352, 6193, 1188, 1710, 1000,
+    		5346, 9083, 9264, 2522, 3082, 5334, 4685, 0352, 6193, 1188, 1710, 1000,
     		3137, 8387, 5288, 6587, 5332, 2838, 1420, 6171, 7766, 9147, 3031, 5982,
     		5349, 3428, 7554, 6873, 1159, 5628, 6388, 2353, 7875, 9375, 1957, 7818,
-    		5778, 0532, 1712, 2680, 6613, 7019, 2787, 6611, 1959, 2921, 6420, 1989,
+    		5778, 1532, 1712, 2680, 6613, 7019, 2787, 6611, 1959, 2921, 6420, 1989,
     		2380, 9525, 7201, 4876};
-    
+ 
     
     final static int SBOX_2[] = {
 
@@ -54,31 +54,31 @@ public class BlowfishAlgorithm {
     		2371, 3786, 9609, 5636, 4371, 9172, 8746, 7764, 6575, 7396, 2413, 8908,
     		6583, 2645, 9958, 1339, 1478, 0275, 9009, 1946, 5764, 2789, 5126, 9468,
     		3983, 5259, 5709, 8583};
-    
+
     
     final static int SBOX_3[] = {
 
-    		5978, 8595, 9772, 9754, 9893, 0161, 7539, 2846, 8138, 2628, 6838, 6894,
+    		5978, 8595, 9772, 9754, 9893, 1161, 7539, 2846, 8138, 2628, 6838, 6894,
     		2774, 1559, 9185, 5925, 2459, 5395, 9431, 3499, 7252, 4680, 8459, 8727,
     		3644, 6958, 4865, 3836, 7362, 2262, 6099, 1246, 9805, 1243, 8844, 3904,
     		5124, 4136, 5497, 6278, 1797, 7156, 9143, 5997, 7001, 2961, 6089, 4416,
-    		9486, 8555, 8484, 0635, 3422, 0722, 2582, 8488, 6481, 5845, 6028, 5069,
+    		9486, 8555, 8484, 3635, 3422, 2722, 2582, 8488, 6481, 5845, 6028, 5069,
     		1168, 4273, 9452, 2674, 6767, 8895, 2521, 3852, 2549, 9546, 6672, 7823,
-    		9864, 5659, 6116, 3548, 8623, 0577, 4564, 9803, 5593, 6345, 6817, 4324,
-    		1125, 3150, 7606, 9479, 4510, 9659, 6094, 0252, 2887, 9710, 8931, 4566,
-    		9136, 8672, 2874, 8940, 5601, 0150, 3308, 6179, 2868, 5920, 8747, 6091,
+    		9864, 5659, 6116, 3548, 8623, 5577, 4564, 9803, 5593, 6345, 6817, 4324,
+    		1125, 3150, 7606, 9479, 4510, 9659, 6094, 7252, 2887, 9710, 8931, 4566,
+    		9136, 8672, 2874, 8940, 5601, 5150, 3308, 6179, 2868, 5920, 8747, 6091,
     		7824, 9385, 8790, 3971, 4909, 6759, 8526, 1365, 5497, 8189, 3129, 7848,
     		2168, 2998, 9487, 2265, 8804, 8575, 6401, 4270, 4775, 5513, 2379, 6414,
-    		5152, 3746, 2343, 6435, 4285, 8444, 7952, 6586, 7821, 0511, 4135, 4735,
-    		7395, 2311, 3427, 1661, 0213, 5969, 5362, 3144, 2952, 4849, 3718, 7110,
-    		1457, 6540, 3590, 2799, 3447, 0374, 2007, 3105, 7853, 9062, 1983, 8744,
-    		7808, 4784, 8968, 3321, 4457, 1386, 8751, 9435, 0643, 4218, 4531, 9104,
-    		8481, 0053, 7061, 4680, 6749, 1927, 1819, 1197, 9399, 5206, 1419, 6634,
+    		5152, 3746, 2343, 6435, 4285, 8444, 7952, 6586, 7821, 5511, 4135, 4735,
+    		7395, 2311, 3427, 1661, 9213, 5969, 5362, 3144, 2952, 4849, 3718, 7110,
+    		1457, 6540, 3590, 2799, 3447, 9374, 2007, 3105, 7853, 9062, 1983, 8744,
+    		7808, 4784, 8968, 3321, 4457, 1386, 8751, 9435, 2643, 4218, 4531, 9104,
+    		8481, 8053, 7061, 4680, 6749, 1927, 1819, 1197, 9399, 5206, 1419, 6634,
     		2875, 4440, 6437, 4512, 3718, 1921, 7999, 8391, 3159, 1956, 1814, 6751,
     		4269, 1239, 7489, 4090, 7186, 4942, 3196, 1256, 7945, 2080, 9514, 6550,
     		2252, 3160, 3881, 9301, 4209, 3762, 1378, 5595, 6638, 9377, 8708, 3039,
-    		8697, 9207, 7346, 7221, 8256, 2599, 6615, 0142, 1540, 3068, 9384, 4773,
-    		4549, 2026, 0541, 4665, 9252, 6149, 7442, 8507, 3251, 8666, 0021, 3243,
+    		8697, 9207, 7346, 7221, 8256, 2599, 6615, 1142, 1540, 3068, 9384, 4773,
+    		4549, 2026, 2541, 4665, 9252, 6149, 7442, 8507, 3251, 8666, 1021, 3243,
     		4088, 1907, 1048, 4810};
     
     final static int SBOX_4[] = {
@@ -137,19 +137,19 @@ public class BlowfishAlgorithm {
 	private static String[] expandKey(String inputKey) {
 		
 		String temp = "";
-		String expandedKey[] = new String[17];
+		String expandedKey[] = new String[18];
 		
-		if(inputKey.length() < 68) {
+		if(inputKey.length() < 72) {
 			temp = inputKey;
 			
-			while (temp.length()< 68) {
+			while (temp.length()< 72) {
 				temp = temp + inputKey;
 			}
 			
-			temp = temp.substring(0, 68);
+			temp = temp.substring(0, 72);
 			temp = BinOperations.stringToBinary(temp);
 			
-			for(int i = 0; i<17; i++) {
+			for(int i = 0; i<18; i++) {
 				
 				expandedKey[i] = temp.substring(i*32, (i*32) + 32);
 			}
@@ -157,10 +157,10 @@ public class BlowfishAlgorithm {
 			return expandedKey;
 			
 			
-		}else if(inputKey.length() == 68) {
+		}else if(inputKey.length() == 72) {
 			
 			temp = BinOperations.stringToBinary(inputKey);
-			for(int i = 0; i<17; i++) {
+			for(int i = 0; i<18; i++) {
 				
 				expandedKey[i] = temp.substring(i*32, (i*32) + 32);
 				
@@ -170,9 +170,9 @@ public class BlowfishAlgorithm {
 			
 		} else {
 			
-			temp = inputKey.substring(0, 68);
+			temp = inputKey.substring(0, 72);
 			temp = BinOperations.stringToBinary(temp);
-			for(int i = 0; i<17; i++) {
+			for(int i = 0; i<18; i++) {
 				
 				expandedKey[i] = temp.substring(i*32, (i*32) + 32);
 				
@@ -185,40 +185,101 @@ public class BlowfishAlgorithm {
 	
 	private static String[] prepareText(String text) {
 		
-		while(text.length()%64 != 0) {
+		while(text.length()%8 != 0) {
 			text = text + "¶";
 		}
 		
-		int count_of_blocks = text.length()/64;
+		int count_of_blocks = text.length()/8;
 		String preparedText[] = new String [count_of_blocks]; 
 		
-		for(int i = 0; i<preparedText.length; i++) {
-			preparedText[i] = text.substring(i*64, (i*64) + 64);
-		}
 		
+		for(int i = 0; i<preparedText.length; i++) {
+			preparedText[i] = BinOperations.stringToBinary(text.substring(i*8, (i*8) + 8));
+		}
 		
 		return preparedText;
 	}
 	
 	public static String encrypt(String text, String key) {
 		
-		return null;
+		String preparedText[] = prepareText(text);
+		String expandedKey[] = expandKey(key);
+		String left;
+		String right;
+		String temp;
+		String cipherText = "";
+		
+		
+		for(int j = 0; j<preparedText.length; j++) {
+			
+			left = preparedText[j].substring(0, 32);
+			right = preparedText[j].substring(32, 64);
+	
+			for(int i = 0; i<16; i++) {
+				 
+				left = BinOperations.functionXor(left, expandedKey[i]);
+				right = BinOperations.functionXor(cipherFunction(left),right);
+				if(i!=15) {
+					temp = left;
+					left = right;
+					right = temp;
+				}
+				
+			}
+			right = BinOperations.functionXor(right, expandedKey[16]);
+			left = BinOperations.functionXor(left, expandedKey[17]);
+			
+			cipherText = cipherText + (left + right);
+		}
+	
+		cipherText = BinOperations.binToString(cipherText);
+		
+		return cipherText;
 		
 	}
 	
 	public static String decipher(String text, String key) {
+		String preparedText[] = prepareText(text);
+		String expandedKey[] = expandKey(key);
+		String left;
+		String right;
+		String temp;
+		String plainText = "";
 		
-		return "Text11:"+text+" Key11:"+key;
+		
+		for(int j = 0; j<preparedText.length; j++) {
+			
+			left = preparedText[j].substring(0, 32);
+			right = preparedText[j].substring(32, 64);
+			
+			for(int i = 0; i<16; i++) {
+				 
+				left = BinOperations.functionXor(left, expandedKey[17-i]);
+				right = BinOperations.functionXor(cipherFunction(left),right);
+				if(i!=15) {
+					temp = left;
+					left = right;
+					right = temp;
+				}
+				
+			}
+			right = BinOperations.functionXor(right, expandedKey[1]);
+			left = BinOperations.functionXor(left, expandedKey[0]);
+			
+			plainText = plainText + (left + right);
+		}
+	
+		plainText = BinOperations.binToString(plainText);
+		
+		return plainText;
+		
 	}
 
 	public static void main(String[] args) {
 		
+		System.out.println(encrypt("ahoj jak se mas", "key"));
 		
-		String preparedText[] = prepareText("ahoj");
-		
-		for(int i = 0; i<preparedText.length; i++) {
-			System.out.println(preparedText[i]);
-		}
+		System.out.println(decipher("]ûáþé%ð©áD", "key"));
 
 	}
 
