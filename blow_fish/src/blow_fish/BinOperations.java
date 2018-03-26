@@ -119,6 +119,12 @@ public class BinOperations {
 		return decimalValue;
 	}
 	
+	public static void main(String[] args) {
+		
+		
+		System.out.println(stringToBinary("1"));
+
+	}
 	
 
 }
