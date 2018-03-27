@@ -3,8 +3,10 @@ package blow_fish;
 
 
 /**
+ * This class contain own exceptions to check input text
+ * in UserInterface.
  * @author ondrejvane
- *
+ * @version 1.0
  */
 class InvalidCharException extends Exception{  
 	 /**
@@ -75,12 +77,9 @@ class InputException{
 		if(input.length() == 0) {
 			throw new InvalidInputException("Bad input!");
 		}
-		
-				
-			
-				   
-		} 
-	}
+		   
+	} 
+}
 
 
 

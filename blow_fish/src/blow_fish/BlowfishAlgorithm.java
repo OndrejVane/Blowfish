@@ -1,6 +1,14 @@
 package blow_fish;
 
 
+/**
+ * This class contain all functions which are used for
+ * Blowfish cipher method.
+ * 
+ * @author ondrejvane
+ * @version 1.0
+ *
+ */
 public class BlowfishAlgorithm {
 	
 	
@@ -106,6 +114,13 @@ public class BlowfishAlgorithm {
 	
 	
 	
+	/**
+	 * This function represent substitution box. For each
+	 * 8-bit input assign 32-bit output from values array.
+	 * @param input		8-bit input
+	 * @param values		255 32-bit values in array (decimal values of PI)
+	 * @return			32-bit value in binary
+	 */
 	private static String sBox(String input, int[] values) {
 		int decimalValue = BinOperations.binToDec(input);
 		String result = BinOperations.stringToBinary(Integer.toString(values[decimalValue]));
@@ -113,6 +128,14 @@ public class BlowfishAlgorithm {
 		return result;
 	}
 	
+	/**
+	 * This function represent cipher function which is used in 
+	 * blowfish. 32-bit input parse on four 8-bit parts. On each part
+	 * is used sBox function. Outputs are xor and add between each other.
+	 * Final input is 32-bit value.
+	 * @param input		32-bit input value in binary. 
+	 * @return			32-bit output value in binary.
+	 */
 	private static String cipherFunction(String input) {
 		String input1_8bit = input.substring(0, 8);
 		String input2_8bit = input.substring(8, 16);
@@ -132,6 +155,12 @@ public class BlowfishAlgorithm {
 		
 	}
 	
+	/**
+	 * This function expand input key when is too short.
+	 * Expanded key is split to 18 subkeys. Each key is 32-bit.
+	 * @param inputKey		Input text which is represent cipher key.
+	 * @return				Array with expanded key in binary.
+	 */
 	private static String[] expandKey(String inputKey) {
 		
 		String temp = "";
@@ -181,6 +210,13 @@ public class BlowfishAlgorithm {
 		}
 	}
 	
+	/**
+	 * This function align input text to 64-bit length blocks.
+	 * The text is completed with a character "¶".
+	 * Input text transform to binary.
+	 * @param text		Input plain text.
+	 * @return			Array with 64-bit length binary number
+	 */
 	private static String[] prepareText(String text) {
 		
 		while(text.length()%8 != 0) {
@@ -198,6 +234,37 @@ public class BlowfishAlgorithm {
 		return preparedText;
 	}
 	
+	
+	/**
+	 * This function remove "¶" chars from end of 
+	 * input text which is used to align text.
+	 * @param input		Text in string.
+	 * @return			Text without "¶" chars on end.
+	 */
+	private static String removePadding(String input) {
+		
+		int counter = 0;
+		String output;
+		
+		for(int i = (input.length()-1); i>=0; i--) {
+			
+			if(input.charAt(i) == '¶') {
+				counter++;
+			}else {
+				break;
+			}
+		}
+		output = input.substring(0, input.length()-counter);
+		
+		return output;
+	}
+	/**
+	 * This function use all previous function to encrypt input text.
+	 * Encryption is performed by Feistel net used 16 times.
+	 * @param text		Input plain text.
+	 * @param key		Input key to encrypt.
+	 * @return			Cipher text in string.
+	 */
 	public static String encrypt(String text, String key) {
 		
 		String preparedText[] = prepareText(text);
@@ -238,6 +305,15 @@ public class BlowfishAlgorithm {
 		
 	}
 	
+	/**
+	 * This function use all previous function to decipher input text.
+	 * Decipher is performed by Feistel net used 16 times.
+	 * This function is same as encryption function  but 
+	 * the input key is used inversely.
+	 * @param text		Input plain text.
+	 * @param key		Input key to encrypt.
+	 * @return			Cipher text in string.
+	 */
 	public static String decipher(String text, String key) {
 		String preparedText[] = prepareText(text);
 		String expandedKey[] = expandKey(key);
@@ -275,28 +351,5 @@ public class BlowfishAlgorithm {
 		return plainText;
 		
 	}
-	
-	private static String removePadding(String input) {
-		
-		int counter = 0;
-		String output;
-		
-		for(int i = (input.length()-1); i>=0; i--) {
-			
-			if(input.charAt(i) == '¶') {
-				counter++;
-			}else {
-				break;
-			}
-		}
-		output = input.substring(0, input.length()-counter);
-		
-		return output;
-	}
-	
-	public static void main(String[] args) {
-		removePadding("Ahoj¶¶¶¶¶");
-	}
-
 
 }
