@@ -29,9 +29,10 @@ public class UserInterface {
 	private JTextArea txtrKey;
 	private JTextArea txtrOutput;
 	public JProgressBar progressBar;
-	public String inputText;
+	private String inputText;
 	public String outputText;
 	public String inputKey;
+	private String temp;
 	public int progressCounter = 78;
 
 	/**
@@ -102,9 +103,10 @@ public class UserInterface {
 		frame.getContentPane().add(scrollPane_1);
 		
 		txtrOutput = new JTextArea();
+		txtrOutput.setEnabled(false);
+		txtrOutput.setEditable(false);
 		scrollPane_1.setViewportView(txtrOutput);
 		txtrOutput.setLineWrap(true);
-		txtrOutput.setEditable(false);
 		
 		JButton btnDecipher = new JButton("Decipher");
 		btnDecipher.addActionListener(new ActionListener() {
@@ -143,7 +145,7 @@ public class UserInterface {
 				}
 				
 				if(controlChar == true && controlEmpty == true ) {
-					txtrOutput.setText(BlowfishAlgorithm.decipher(inputText, inputKey));
+					txtrOutput.setText(BlowfishAlgorithm.decipher(temp, inputKey));
 				}
 			}
 		});
@@ -187,6 +189,7 @@ public class UserInterface {
 				}
 				
 				if(controlChar == true && controlEmpty == true ) {
+					
 					txtrOutput.setText(BlowfishAlgorithm.encrypt(inputText, inputKey));
 				}
 					
@@ -201,5 +204,26 @@ public class UserInterface {
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(125, 220, 411, 23);
 		frame.getContentPane().add(progressBar);
+		
+		JButton btnCopyToInput = new JButton("Copy to input field");
+		btnCopyToInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				temp = txtrOutput.getText();
+				txtrInput.setText(temp);
+			}
+		});
+		btnCopyToInput.setBounds(259, 359, 153, 29);
+		frame.getContentPane().add(btnCopyToInput);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtrInput.setText(null);
+				txtrOutput.setText(null);
+				txtrKey.setText(null);
+			}
+		});
+		btnClear.setBounds(92, 359, 117, 29);
+		frame.getContentPane().add(btnClear);
 	}
 }

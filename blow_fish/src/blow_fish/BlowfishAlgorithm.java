@@ -234,7 +234,10 @@ public class BlowfishAlgorithm {
 	
 		cipherText = BinOperations.binToString(cipherText);
 		
+		
+		
 		return cipherText;
+		
 		
 	}
 	
@@ -277,9 +280,19 @@ public class BlowfishAlgorithm {
 
 	public static void main(String[] args) {
 		
-		System.out.println(encrypt("ahoj jak se mas", "key"));
+		String temp = encrypt("hdgssjsjjsjsjsjjsjsjsjsjsjsjjsjsjeiucnckjsdkjof", "key");
+		for(int i = 0; i<temp.length(); i++) {
+			if (Character.isLetterOrDigit(temp.charAt(i)) || (temp.charAt(i) >= 32 && temp.charAt(i) <= 126)) {	
+					System.out.print(temp.charAt(i));
+				}else {
+					System.out.print((int)temp.charAt(i));
+				}
+		}
+		System.out.println();
 		
-		System.out.println(decipher("]ûáþé%ð©áD", "key"));
+		System.out.println(decipher(encrypt("In scenic settlement around the castle of Prague in Nerudova street you are about to face fabulous experience. Taste some of our old bohemian specialities or international cuisine. To the tasty food belongs also a tasty drink. On that account we are about to serve to you greatly chilled tank beer Krušovice or we can offer you the selection of great quality wine directly from our country or worldwide production. Our pleasant staff will care for you in an old bohemian themed inner restaurant area or in our all ear-long covered garden.", "khhhhey"),"khhhhey"));
+		
+		//System.out.println(decipher("", "key"));
 
 	}
 
