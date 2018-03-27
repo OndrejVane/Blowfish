@@ -169,7 +169,7 @@ public class UserInterface {
 		btnDecipher.setBounds(383, 189, 147, 29);
 		frame.getContentPane().add(btnDecipher);
 		
-		JButton btnCipher = new JButton("Cipher");
+		JButton btnCipher = new JButton("Encrypt");
 		btnCipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
