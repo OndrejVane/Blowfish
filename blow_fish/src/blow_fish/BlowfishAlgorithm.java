@@ -1,7 +1,7 @@
 package blow_fish;
 
+
 public class BlowfishAlgorithm {
-	
 	
 	
     final static int SBOX_1[] = {
@@ -28,7 +28,6 @@ public class BlowfishAlgorithm {
     		5349, 3428, 7554, 6873, 1159, 5628, 6388, 2353, 7875, 9375, 1957, 7818,
     		5778, 1532, 1712, 2680, 6613, 7019, 2787, 6611, 1959, 2921, 6420, 1989,
     		2380, 9525, 7201, 4876};
- 
     
     final static int SBOX_2[] = {
 
@@ -54,7 +53,6 @@ public class BlowfishAlgorithm {
     		2371, 3786, 9609, 5636, 4371, 9172, 8746, 7764, 6575, 7396, 2413, 8908,
     		6583, 2645, 9958, 1339, 1478, 0275, 9009, 1946, 5764, 2789, 5126, 9468,
     		3983, 5259, 5709, 8583};
-
     
     final static int SBOX_3[] = {
 
@@ -209,7 +207,6 @@ public class BlowfishAlgorithm {
 		String temp;
 		String cipherText = "";
 		
-		
 		for(int j = 0; j<preparedText.length; j++) {
 			
 			left = preparedText[j].substring(0, 32);
@@ -273,27 +270,33 @@ public class BlowfishAlgorithm {
 		}
 	
 		plainText = BinOperations.binToString(plainText);
+		plainText = removePadding(plainText);
 		
 		return plainText;
 		
 	}
-
-	public static void main(String[] args) {
+	
+	private static String removePadding(String input) {
 		
-		String temp = encrypt("hdgssjsjjsjsjsjjsjsjsjsjsjsjjsjsjeiucnckjsdkjof", "key");
-		for(int i = 0; i<temp.length(); i++) {
-			if (Character.isLetterOrDigit(temp.charAt(i)) || (temp.charAt(i) >= 32 && temp.charAt(i) <= 126)) {	
-					System.out.print(temp.charAt(i));
-				}else {
-					System.out.print((int)temp.charAt(i));
-				}
+		int counter = 0;
+		String output;
+		
+		for(int i = (input.length()-1); i>=0; i--) {
+			
+			if(input.charAt(i) == '¶') {
+				counter++;
+			}else {
+				break;
+			}
 		}
-		System.out.println();
+		output = input.substring(0, input.length()-counter);
 		
-		System.out.println(decipher(encrypt("In scenic settlement around the castle of Prague in Nerudova street you are about to face fabulous experience. Taste some of our old bohemian specialities or international cuisine. To the tasty food belongs also a tasty drink. On that account we are about to serve to you greatly chilled tank beer Krušovice or we can offer you the selection of great quality wine directly from our country or worldwide production. Our pleasant staff will care for you in an old bohemian themed inner restaurant area or in our all ear-long covered garden.", "khhhhey"),"khhhhey"));
-		
-		//System.out.println(decipher("", "key"));
-
+		return output;
 	}
+	
+	public static void main(String[] args) {
+		removePadding("Ahoj¶¶¶¶¶");
+	}
+
 
 }

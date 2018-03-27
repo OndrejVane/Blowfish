@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -33,7 +36,7 @@ public class UserInterface {
 	public String outputText;
 	public String inputKey;
 	private String temp;
-	public int progressCounter = 78;
+	
 
 	/**
 	 * Launch the application.
@@ -62,6 +65,7 @@ public class UserInterface {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 658, 410);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,7 +91,7 @@ public class UserInterface {
 		txtrInput = new JTextArea();
 		scrollPane.setViewportView(txtrInput);
 		txtrInput.setLineWrap(true);
-		txtrInput.setText("Input your text.");
+		txtrInput.setText("Input your text");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(43, 161, 572, 23);
@@ -96,11 +100,16 @@ public class UserInterface {
 		txtrKey = new JTextArea();
 		scrollPane_2.setViewportView(txtrKey);
 		txtrKey.setLineWrap(true);
-		txtrKey.setText("Enter your key.");
+		txtrKey.setText("Enter your key");
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(43, 252, 572, 105);
 		frame.getContentPane().add(scrollPane_1);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setStringPainted(true);
+		progressBar.setBounds(125, 220, 411, 23);
+		frame.getContentPane().add(progressBar);
 		
 		txtrOutput = new JTextArea();
 		txtrOutput.setEnabled(false);
@@ -112,13 +121,16 @@ public class UserInterface {
 		btnDecipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				progressBar.setValue(0);
 				boolean controlChar = true;
 				boolean controlEmpty = true;
+				progressBar.setValue(10);
 						
 				try {
 					inputText = txtrInput.getText();
 					CharException.validateChar(inputText);
 					InputException.validateInput(inputText);
+					progressBar.setValue(20);
 					
 					
 				}catch(InvalidCharException m) {
@@ -134,6 +146,8 @@ public class UserInterface {
 					inputKey = txtrKey.getText();
 					CharException.validateChar(inputKey);
 					InputException.validateInput(inputKey);
+					progressBar.setValue(30);
+					
 					
 				}catch(InvalidCharException m) {
 					controlChar = false;
@@ -145,7 +159,10 @@ public class UserInterface {
 				}
 				
 				if(controlChar == true && controlEmpty == true ) {
+					
+					progressBar.setValue(50);
 					txtrOutput.setText(BlowfishAlgorithm.decipher(temp, inputKey));
+					progressBar.setValue(100);
 				}
 			}
 		});
@@ -156,13 +173,16 @@ public class UserInterface {
 		btnCipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				progressBar.setValue(0);
 				boolean controlChar = true;
 				boolean controlEmpty = true;
-						
+				progressBar.setValue(10);
+							
 				try {
 					inputText = txtrInput.getText();
 					CharException.validateChar(inputText);
 					InputException.validateInput(inputText);
+					progressBar.setValue(20);
 					
 					
 				}catch(InvalidCharException m) {
@@ -178,6 +198,7 @@ public class UserInterface {
 					inputKey = txtrKey.getText();
 					CharException.validateChar(inputKey);
 					InputException.validateInput(inputKey);
+					progressBar.setValue(30);
 					
 				}catch(InvalidCharException m) {
 					controlChar = false;
@@ -190,7 +211,10 @@ public class UserInterface {
 				
 				if(controlChar == true && controlEmpty == true ) {
 					
+					progressBar.setValue(50);
+					
 					txtrOutput.setText(BlowfishAlgorithm.encrypt(inputText, inputKey));
+					progressBar.setValue(100);
 				}
 					
 				
@@ -199,11 +223,6 @@ public class UserInterface {
 		});
 		btnCipher.setBounds(128, 189, 159, 29);
 		frame.getContentPane().add(btnCipher);
-		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setStringPainted(true);
-		progressBar.setBounds(125, 220, 411, 23);
-		frame.getContentPane().add(progressBar);
 		
 		JButton btnCopyToInput = new JButton("Copy to input field");
 		btnCopyToInput.addActionListener(new ActionListener() {
@@ -221,9 +240,29 @@ public class UserInterface {
 				txtrInput.setText(null);
 				txtrOutput.setText(null);
 				txtrKey.setText(null);
+				progressBar.setValue(0);
 			}
 		});
 		btnClear.setBounds(92, 359, 117, 29);
 		frame.getContentPane().add(btnClear);
+		
+		JButton btnExportToFile = new JButton("Export to file");
+		btnExportToFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				     
+				      PrintWriter out = new PrintWriter(new FileWriter("output.txt"));
+				      out.println("Input: "+txtrInput.getText());
+				      out.println("Output: "+txtrOutput.getText());
+				      out.close();
+				      JOptionPane.showMessageDialog(null, "Successful saved to output.txt!");
+				   }
+				      catch(IOException e1) {
+				    	  JOptionPane.showMessageDialog(null, "Error writing to file!");
+				   }
+			}
+		});
+		btnExportToFile.setBounds(470, 359, 117, 29);
+		frame.getContentPane().add(btnExportToFile);
 	}
 }
