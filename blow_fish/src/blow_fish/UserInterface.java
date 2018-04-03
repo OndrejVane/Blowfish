@@ -31,11 +31,11 @@ public class UserInterface {
 	private JTextArea txtrInput;
 	private JTextArea txtrKey;
 	private JTextArea txtrOutput;
-	public JProgressBar progressBar;
 	private String inputText;
-	public String outputText;
-	public String inputKey;
+	private String inputKey;
 	private String temp;
+	public String outputText;
+	public JProgressBar progressBar;
 	
 
 	/**
@@ -91,7 +91,7 @@ public class UserInterface {
 		txtrInput = new JTextArea();
 		scrollPane.setViewportView(txtrInput);
 		txtrInput.setLineWrap(true);
-		txtrInput.setText("Input your text");
+		txtrInput.setText("Enter your text");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(43, 161, 572, 23);
@@ -124,6 +124,7 @@ public class UserInterface {
 				progressBar.setValue(0);
 				boolean controlChar = true;
 				boolean controlEmpty = true;
+				boolean controlLength = true;
 				progressBar.setValue(10);
 						
 				try {
@@ -146,6 +147,7 @@ public class UserInterface {
 					inputKey = txtrKey.getText();
 					CharException.validateChar(inputKey);
 					InputException.validateInput(inputKey);
+					LengthException.validateLength(inputKey);
 					progressBar.setValue(30);
 					
 					
@@ -156,12 +158,19 @@ public class UserInterface {
 				}catch(InvalidInputException n) {
 					controlEmpty = false;
 					JOptionPane.showMessageDialog(null, "Key field is empty!");
+				}catch(InvalidLengthException o) {
+					controlLength = false;
+					JOptionPane.showMessageDialog(null, "Key is too long. Max 56 chars.");
 				}
 				
-				if(controlChar == true && controlEmpty == true ) {
+				if(controlChar == true && controlEmpty == true && controlLength == true) {
 					
 					progressBar.setValue(50);
+					double start = System.nanoTime()/1000000;
 					txtrOutput.setText(BlowfishAlgorithm.decipher(temp, inputKey));
+					double end = System.nanoTime()/1000000;
+					double time = (end-start)/1000;
+					System.out.println("Runtime: "+ time);
 					progressBar.setValue(100);
 				}
 			}
@@ -176,6 +185,7 @@ public class UserInterface {
 				progressBar.setValue(0);
 				boolean controlChar = true;
 				boolean controlEmpty = true;
+				boolean controlLength = true;
 				progressBar.setValue(10);
 							
 				try {
@@ -198,6 +208,7 @@ public class UserInterface {
 					inputKey = txtrKey.getText();
 					CharException.validateChar(inputKey);
 					InputException.validateInput(inputKey);
+					LengthException.validateLength(inputKey);
 					progressBar.setValue(30);
 					
 				}catch(InvalidCharException m) {
@@ -207,13 +218,20 @@ public class UserInterface {
 				}catch(InvalidInputException n) {
 					controlEmpty = false;
 					JOptionPane.showMessageDialog(null, "Key field is empty!");
+				}catch(InvalidLengthException o) {
+					controlLength = false;
+					JOptionPane.showMessageDialog(null, "Key is too long. Max 56 chars.");
 				}
 				
-				if(controlChar == true && controlEmpty == true ) {
+				if(controlChar == true && controlEmpty == true && controlLength == true) {
 					
 					progressBar.setValue(50);
-					
+					System.out.println("Počet znaku: "+inputText.length());
+					double start = System.nanoTime()/1000000;
 					txtrOutput.setText(BlowfishAlgorithm.encrypt(inputText, inputKey));
+					double end = System.nanoTime()/1000000;
+					double time = (end-start)/1000;
+					System.out.println("Runtime: "+ time);
 					progressBar.setValue(100);
 				}
 					
@@ -253,6 +271,7 @@ public class UserInterface {
 				     
 				      PrintWriter out = new PrintWriter(new FileWriter("output.txt"));
 				      out.println("Input: "+txtrInput.getText());
+				      out.println("Key: "+txtrKey.getText());
 				      out.println("Output: "+txtrOutput.getText());
 				      out.close();
 				      JOptionPane.showMessageDialog(null, "Successful saved to output.txt!");

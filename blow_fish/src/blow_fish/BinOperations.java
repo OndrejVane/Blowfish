@@ -20,7 +20,7 @@ public class BinOperations {
 	 * @param numberOfBits	Is count of digits binary number.	
 	 * @return				binary number.
 	 */
-	public static String decToBin(int values, int numberOfBits) {
+	private static String decToBin(int values, int numberOfBits) {
 		String text;
 		String temp = "";
 		int numberOfZero;
@@ -141,6 +141,13 @@ public class BinOperations {
 		result = String.copyValueOf(resultArray);
 		
 		return result;
+		
+	}
+	public static void main(String[] args) {
+		
+		System.out.println(stringToBinary("7777").length());
+
+		
 		
 	}
 }

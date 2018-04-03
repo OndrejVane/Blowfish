@@ -81,5 +81,42 @@ class InputException{
 	} 
 }
 
+/**
+ * @author ondrejvane
+ *
+ */
+class InvalidLengthException extends Exception{  
+	 /**
+	 * Define new exception.
+	 */
+	private static final long serialVersionUID = 3L;
+
+	InvalidLengthException(String n){  
+	  super(n);  
+	 }  
+	}  
+
+
+/**
+ * @author ondrejvane
+ *
+ */
+class LengthException{
+		
+	/**
+	 * This function check input text. When the text longer than 56 throw exception.
+	 * @param input						Checking input text.
+	 * @throws InvalidInputException		Exception which is marks the text is too long.
+	 */
+	static void validateLength(String input)throws InvalidLengthException{  
+		   	
+		if(input.length()>56) {
+			throw new InvalidLengthException("Bad input!");
+		}
+		   
+	} 
+}
+
+
 
 
