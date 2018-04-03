@@ -129,9 +129,9 @@ public class BlowfishAlgorithm {
 	 * @param values		255 32-bit values in array (decimal values of PI)
 	 * @return			32-bit value in binary
 	 */
-	private static String sBox(String input, int[] values) {
+	private static String sBox(String input, String[] values) {
 		int decimalValue = BinOperations.binToDec(input);
-		String result = BinOperations.stringToBinary(Integer.toString(values[decimalValue]));
+		String result = values[decimalValue];
 		
 		return result;
 	}
@@ -150,10 +150,10 @@ public class BlowfishAlgorithm {
 		String input3_8bit = input.substring(16, 24);
 		String input4_8bit = input.substring(24, 32);
 		
-		String output1_32bit = sBox(input1_8bit, s_box_1);
-		String output2_32bit = sBox(input2_8bit, s_box_2);
-		String output3_32bit = sBox(input3_8bit, s_box_3);
-		String output4_32bit = sBox(input4_8bit, s_box_4);
+		String output1_32bit = sBox(input1_8bit, s_box_1_bin);
+		String output2_32bit = sBox(input2_8bit, s_box_2_bin);
+		String output3_32bit = sBox(input3_8bit, s_box_3_bin);
+		String output4_32bit = sBox(input4_8bit, s_box_4_bin);
 		
 		String temp_1 = BinOperations.binaryAdd(output1_32bit, output2_32bit);
 		String temp_2 = BinOperations.functionXor(temp_1, output3_32bit);
@@ -217,10 +217,97 @@ public class BlowfishAlgorithm {
 			
 		}
 	}
+	
+	private static void sBoxToBinary() {
+		for(int i = 0; i<s_box_1.length; i++) {
+			s_box_1_bin[i] = BinOperations.stringToBinary(Integer.toString(s_box_1[i]));
+		}
 		
+		for(int i = 0; i<s_box_2.length; i++) {
+			s_box_2_bin[i] = BinOperations.stringToBinary(Integer.toString(s_box_2[i]));
+		}
+		
+		for(int i = 0; i<s_box_3.length; i++) {
+			s_box_3_bin[i] = BinOperations.stringToBinary(Integer.toString(s_box_3[i]));
+		}
+		
+		for(int i = 0; i<s_box_4.length; i++) {
+			s_box_4_bin[i] = BinOperations.stringToBinary(Integer.toString(s_box_4[i]));
+		}
+		
+		for(int i = 0; i<p_array.length; i++) {
+			p_array_bin[i] = BinOperations.stringToBinary(Integer.toString(p_array[i]));
+		}
+	}
+		
+	private static String initEncryption(String initText) {
+		String preparedText = initText;
+		String left;
+		String right;
+		String temp;
+		String cipherText;
+			
+			left = preparedText.substring(0, 32);
+			right = preparedText.substring(32, 64);
+	
+			for(int i = 0; i<16; i++) {
+				 
+				left = BinOperations.functionXor(left, p_array_bin[i]);
+				right = BinOperations.functionXor(cipherFunction(left),right);
+				if(i!=15) {
+					temp = left;
+					left = right;
+					right = temp;
+				}
+				
+			}
+			right = BinOperations.functionXor(right, p_array_bin[16]);
+			left = BinOperations.functionXor(left, p_array_bin[17]);
+			
+			cipherText = left + right;
+	
+		return cipherText;
+	}
 	
 	private static void initSboxAndParray(String[] key) {
-		//něco
+		String initializationKey = "0000000000000000000000000000000000000000000000000000000000000000";	//inicializační klíč max 64 bitu
+		sBoxToBinary();
+		
+		//xor vstupniho klice s p polem
+		for(int i = 0; i<p_array_bin.length; i++) {
+			p_array_bin[i] = BinOperations.functionXor(p_array_bin[i], key[i]);
+		}
+		
+		//inicializace p pole
+		for(int i = 0; i<p_array_bin.length; i = i+2) {
+			initializationKey = initEncryption(initializationKey);
+			p_array_bin[i] = initializationKey.substring(0, 32);
+			p_array_bin[i+1] = initializationKey.substring(32, 64);
+		}
+		//inicializace 1. s-boxu
+		for(int i = 0; i<s_box_1_bin.length; i = i+2) {
+			initializationKey = initEncryption(initializationKey);
+			s_box_1_bin[i] = initializationKey.substring(0, 32);
+			s_box_1_bin[i+1] = initializationKey.substring(32, 64);
+		}
+		//inicializace 2. s-boxu
+		for(int i = 0; i<s_box_2_bin.length; i = i+2) {
+			initializationKey = initEncryption(initializationKey);
+			s_box_2_bin[i] = initializationKey.substring(0, 32);
+			s_box_2_bin[i+1] = initializationKey.substring(32, 64);
+		}
+		//inicializace 3. s-boxu
+		for(int i = 0; i<s_box_3_bin.length; i = i+2) {
+			initializationKey = initEncryption(initializationKey);
+			s_box_3_bin[i] = initializationKey.substring(0, 32);
+			s_box_3_bin[i+1] = initializationKey.substring(32, 64);
+		}
+		
+		for(int i = 0; i<s_box_4_bin.length; i = i+2) {
+			initializationKey = initEncryption(initializationKey);
+			s_box_4_bin[i] = initializationKey.substring(0, 32);
+			s_box_4_bin[i+1] = initializationKey.substring(32, 64);
+		}
 	}
 	
 	/**
@@ -296,7 +383,7 @@ public class BlowfishAlgorithm {
 	
 			for(int i = 0; i<16; i++) {
 				 
-				left = BinOperations.functionXor(left, expandedKey[i]);
+				left = BinOperations.functionXor(left, p_array_bin[i]);
 				right = BinOperations.functionXor(cipherFunction(left),right);
 				if(i!=15) {
 					temp = left;
@@ -305,8 +392,8 @@ public class BlowfishAlgorithm {
 				}
 				
 			}
-			right = BinOperations.functionXor(right, expandedKey[16]);
-			left = BinOperations.functionXor(left, expandedKey[17]);
+			right = BinOperations.functionXor(right, p_array_bin[16]);
+			left = BinOperations.functionXor(left, p_array_bin[17]);
 			
 			cipherText = cipherText + (left + right);
 		}
@@ -346,7 +433,7 @@ public class BlowfishAlgorithm {
 			
 			for(int i = 0; i<16; i++) {
 				 
-				left = BinOperations.functionXor(left, expandedKey[17-i]);
+				left = BinOperations.functionXor(left, p_array_bin[17-i]);
 				right = BinOperations.functionXor(cipherFunction(left),right);
 				if(i!=15) {
 					temp = left;
@@ -355,8 +442,8 @@ public class BlowfishAlgorithm {
 				}
 				
 			}
-			right = BinOperations.functionXor(right, expandedKey[1]);
-			left = BinOperations.functionXor(left, expandedKey[0]);
+			right = BinOperations.functionXor(right, p_array_bin[1]);
+			left = BinOperations.functionXor(left, p_array_bin[0]);
 			
 			plainText = plainText + (left + right);
 		}
