@@ -160,7 +160,7 @@ public class UserInterface {
 					JOptionPane.showMessageDialog(null, "Key field is empty!");
 				}catch(InvalidLengthException o) {
 					controlLength = false;
-					JOptionPane.showMessageDialog(null, "Key is too long. Max 56 chars.");
+					JOptionPane.showMessageDialog(null, "Wrong input key. Minimum key length is 4 chars and maximum is 56 chars.");
 				}
 				
 				if(controlChar == true && controlEmpty == true && controlLength == true) {
@@ -220,7 +220,7 @@ public class UserInterface {
 					JOptionPane.showMessageDialog(null, "Key field is empty!");
 				}catch(InvalidLengthException o) {
 					controlLength = false;
-					JOptionPane.showMessageDialog(null, "Key is too long. Max 56 chars.");
+					JOptionPane.showMessageDialog(null, "Wrong input key. Minimum key length is 4 chars and maximum is 56 chars.");
 				}
 				
 				if(controlChar == true && controlEmpty == true && controlLength == true) {

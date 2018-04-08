@@ -110,7 +110,7 @@ class LengthException{
 	 */
 	static void validateLength(String input)throws InvalidLengthException{  
 		   	
-		if(input.length()>56) {
+		if(input.length()>56 || input.length()<4) {
 			throw new InvalidLengthException("Bad input!");
 		}
 		   
