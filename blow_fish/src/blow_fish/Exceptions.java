@@ -104,9 +104,9 @@ class InvalidLengthException extends Exception{
 class LengthException{
 		
 	/**
-	 * This function check input text. When the text longer than 56 throw exception.
+	 * This function check input text. When the text longer than 56 or shorter than 4 chars throw exception.
 	 * @param input						Checking input text.
-	 * @throws InvalidInputException		Exception which is marks the text is too long.
+	 * @throws InvalidInputException		Exception which is marks the input text is wrong.
 	 */
 	static void validateLength(String input)throws InvalidLengthException{  
 		   	

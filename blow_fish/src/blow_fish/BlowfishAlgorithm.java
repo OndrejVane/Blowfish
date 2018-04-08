@@ -218,6 +218,11 @@ public class BlowfishAlgorithm {
 		}
 	}
 	
+	/**
+	 * Transform all integer numbers in s-box and p_arrays to binary. Each char is transform
+	 * to 8 bit binary number. Transformed s_boxe_x is stored in s_box_x_bin and p_array is stored 
+	 * in p_array_bin.
+	 */
 	private static void sBoxToBinary() {
 		for(int i = 0; i<s_box_1.length; i++) {
 			s_box_1_bin[i] = BinOperations.stringToBinary(Integer.toString(s_box_1[i]));
@@ -240,6 +245,12 @@ public class BlowfishAlgorithm {
 		}
 	}
 		
+	/**
+	 * This function contains an encryption algorithm that is used to initialize the p_array and
+	 * s_boxes.
+	 * @param initText		Input text which is encrypted.
+	 * @return				Cipher input text.
+	 */
 	private static String initEncryption(String initText) {
 		String preparedText = initText;
 		String left;
@@ -269,6 +280,11 @@ public class BlowfishAlgorithm {
 		return cipherText;
 	}
 	
+	/**
+	 * This function initializes the s-boxes and p-array based on the input key.
+	 * 
+	 * @param key	Prepared input key, which is cyclically added to a length of 576 bits.
+	 */
 	private static void initSboxAndParray(String[] key) {
 		String initializationKey = "0000000000000000000000000000000000000000000000000000000000000000";	//inicializační klíč max 64 bitu
 		sBoxToBinary();
@@ -302,7 +318,7 @@ public class BlowfishAlgorithm {
 			s_box_3_bin[i] = initializationKey.substring(0, 32);
 			s_box_3_bin[i+1] = initializationKey.substring(32, 64);
 		}
-		
+		//inicializace 4. s-boxu
 		for(int i = 0; i<s_box_4_bin.length; i = i+2) {
 			initializationKey = initEncryption(initializationKey);
 			s_box_4_bin[i] = initializationKey.substring(0, 32);
