@@ -170,7 +170,7 @@ public class UserInterface {
 					txtrOutput.setText(BlowfishAlgorithm.decipher(temp, inputKey));
 					double end = System.nanoTime()/1000000;
 					double time = (end-start)/1000;
-					System.out.println("Runtime: "+ time);
+					System.out.println("Runtime of decryption: "+ time+"s Number of characters: "+inputText.length());
 					progressBar.setValue(100);
 				}
 			}
@@ -226,12 +226,11 @@ public class UserInterface {
 				if(controlChar == true && controlEmpty == true && controlLength == true) {
 					
 					progressBar.setValue(50);
-					System.out.println("Počet znaku: "+inputText.length());
 					double start = System.nanoTime()/1000000;
 					txtrOutput.setText(BlowfishAlgorithm.encrypt(inputText, inputKey));
 					double end = System.nanoTime()/1000000;
 					double time = (end-start)/1000;
-					System.out.println("Runtime: "+ time);
+					System.out.println("Runtime of encryption: "+ time+"s Number of characters: "+inputText.length());
 					progressBar.setValue(100);
 				}
 					
