@@ -143,5 +143,64 @@ public class BinOperations {
 		return result;
 		
 	}
+	
+	/**
+	 * This function transform binary number to hex number.
+	 * @param bin	Binary number in string.
+	 * @return		Hexadecimal number in string.
+	 */
+	public static String binaryToHex(String bin) {
+		int count = bin.length()/8;
+		int index = 0;
+		String temp;
+		String result = "";
+		
+		
+		for(int i = 0; i<count; i++) {
+			temp = bin.substring(index,index + 8);
+			String hex = Long.toHexString(Long.parseLong(temp, 2));
+		    result = result + String.format("%" + (int)(Math.ceil(temp.length() / 4.0)) + "s", hex).replace(' ', '0');
+		    index = index + 8;
+		}
+		
+	    return result.toUpperCase();
+	}
+	
+    /**
+     * This function transform hexadecimal number to binary number.
+     * @param hex	Hexadecimal number as string.
+     * @return		binary number as string.
+     */
+    public static String hexToBinary(String hex) {
+
+        StringBuilder binStrBuilder = new StringBuilder();
+        String result;
+        for (int i = 0; i < hex.length() - 1; i += 2) {
+
+                String output = hex.substring(i, (i + 2));
+
+                int decimal = Integer.parseInt(output, 16);
+
+                String binStr = Integer.toBinaryString(decimal);
+                int len = binStr.length();
+                StringBuilder sbf = new StringBuilder();
+                if (len < 8) {
+
+                        for (int k = 0; k < (8 - len); k++) {
+                                sbf.append("0");
+                        }
+                        sbf.append(binStr);
+                } else {
+                        sbf.append(binStr);
+                }
+
+                binStrBuilder.append(sbf.toString());
+        }
+
+        
+        	result =binStrBuilder.toString();
+        	return binToString(result);
+        
+}
 
 }

@@ -414,7 +414,7 @@ public class BlowfishAlgorithm {
 			cipherText = cipherText + (left + right);
 		}
 	
-		cipherText = BinOperations.binToString(cipherText);
+		cipherText = BinOperations.binaryToHex(cipherText);
 		
 		
 		
@@ -432,7 +432,8 @@ public class BlowfishAlgorithm {
 	 * @param key		Input key to encrypt.
 	 * @return			Cipher text in string.
 	 */
-	public static String decipher(String text, String key) {
+	public static String decipher(String hextext, String key) {
+		String text = BinOperations.hexToBinary(hextext);
 		String preparedText[] = prepareText(text);
 		String expandedKey[] = expandKey(key);
 		initSboxAndParray(expandedKey);

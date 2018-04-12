@@ -81,7 +81,7 @@ public class UserInterface {
 		lblKey.setBounds(43, 144, 61, 16);
 		frame.getContentPane().add(lblKey);
 		
-		JLabel lblOutput = new JLabel("Output");
+		JLabel lblOutput = new JLabel("Output:");
 		lblOutput.setBounds(43, 234, 61, 16);
 		frame.getContentPane().add(lblOutput);
 		
